@@ -32,6 +32,11 @@
             margin-bottom: 1rem;
         }
 
+        .form-row {
+            display: flex;
+            gap: 3rem;
+        }
+
         label {
             display: block;
             margin-bottom: 0.5rem;
@@ -154,55 +159,57 @@
                 </div>
             </div>
 
-            <!-- Localização -->
-            <div class="form-group">
-                <label>Localização</label>
-                <div class="button-group" id="localization">
-                    <button type="button" data-value="APCH">APCH</button>
-                    <button type="button" data-value="CLIMB-OUT">CLIMB-OUT</button>
-                </div>
-                <input type="text" id="rwy" placeholder="RWY">
-            </div>
+            <div class="form-row">
 
-            <!-- Severidade (WS only) -->
-            <div class="form-group" id="severityGroup">
-                <label>Severidade</label>
-                <div class="button-group" id="severity">
-                    <button type="button" data-value="MOD">MOD</button>
-                    <button type="button" data-value="SEV" class="active">SEV</button>
-                </div>
-            </div>
-
-            <!-- Origem -->
-            <div class="form-group">
-                <label>Origem</label>
-                <div class="button-group" id="infoSource">
-                    <button type="button" data-value="REP">REP</button>
-                    <button type="button" data-value="OBS">OBS</button>
-                    <button type="button" data-value="FCST">FCST</button>
+                <!-- Localização -->
+                <div class="form-group">
+                    <label>Localização</label>
+                    <div class="button-group" id="localization">
+                        <button type="button" data-value="APCH">APCH</button>
+                        <button type="button" data-value="CLIMB-OUT">CLIMB-OUT</button>
+                    </div>
+                    <input type="text" id="rwy" placeholder="RWY">
                 </div>
 
-                <!-- Campos REP -->
-                <div id="repFields" class="hidden">
-                    <div class="grid">
-                        <div>
-                            <label>REP AT (HHMM)</label>
-                            <input type="text" id="repTime" maxlength="4" placeholder="1210">
-                        </div>
-                        <div>
-                            <label>Aeronave</label>
-                            <input type="text" id="repAC" maxlength="8" placeholder="B747">
-                        </div>
+                <!-- Severidade (WS only) -->
+                <div class="form-group" id="severityGroup">
+                    <label>Severidade</label>
+                    <div class="button-group" id="severity">
+                        <button type="button" data-value="MOD">MOD</button>
+                        <button type="button" data-value="SEV" class="active">SEV</button>
                     </div>
                 </div>
 
-                <!-- Campos OBS -->
-                <div id="obsFields" class="hidden">
-                    <label>OBS AT (HH:MM)</label>
-                    <input type="time" id="obsAt">
+                <!-- Origem -->
+                <div class="form-group">
+                    <label>Origem</label>
+                    <div class="button-group" id="infoSource">
+                        <button type="button" data-value="REP">REP</button>
+                        <button type="button" data-value="OBS">OBS</button>
+                        <button type="button" data-value="FCST">FCST</button>
+                    </div>
+
+                    <!-- Campos REP -->
+                    <div id="repFields" class="hidden">
+                        <div class="grid">
+                            <div>
+                                <label>REP AT (HHMM)</label>
+                                <input type="text" id="repTime" maxlength="4" placeholder="1210">
+                            </div>
+                            <div>
+                                <label>Aeronave</label>
+                                <input type="text" id="repAC" maxlength="8" placeholder="B747">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campos OBS -->
+                    <div id="obsFields" class="hidden">
+                        <label>OBS AT (HH:MM)</label>
+                        <input type="time" id="obsAt">
+                    </div>
                 </div>
             </div>
-
             <!-- Vento e Medidas -->
             <div class="grid">
                 <div>
