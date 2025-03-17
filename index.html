@@ -106,17 +106,16 @@
 
 <body>
     <div class="card">
-        <h2>Aviso de Cortante de Vento</h2>
+        <h2>Aviso de Cortante de Vento - SBAR</h2>
 
         <div class="info-box">
             <h3>METAR</h3>
-            <p>METAR SBAR 141900Z 12012KT 9999 FEW024 30/23 Q1010=</p>
+            <p>METAR SBAR 141900Z 12012KT 9999 FEW024 30/23 Q1010 WS ALL RWY=</p>
         </div>
 
         <div class="info-box">
             <h3>Mensagens WS disponíveis (OPMET)</h3>
-            <p>SBAR WS WRNG 4 141730 VALID TL 141930</p>
-            <p>MOD WS IN APCH REP AT 1210 B747</p>
+            <p>SBAR WS WRNG 4 141730 VALID TL 141930 MOD WS IN APCH REP AT 1210 B747</p>
         </div>
 
         <form id="windShearForm">
@@ -128,13 +127,6 @@
                     <button type="button" data-value="MBST">MBST</button>
                 </div>
             </div>
-
-            <!-- Localidade -->
-            <div class="form-group">
-                <label>Localidade</label>
-                <input type="text" id="location" value="SBAR">
-            </div>
-
             <!-- Validade -->
             <div class="form-group">
                 <label>Validade</label>
