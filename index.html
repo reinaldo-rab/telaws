@@ -115,10 +115,20 @@
 
         <div class="info-box">
             <h3>Mensagens WS disponíveis (OPMET)</h3>
-            <p>SBAR WS WRNG 4 141730 VALID TL 141930 MOD WS IN APCH REP AT 1210 B747</p>
+            <p>SBAR WS WRNG 4 141730 VALID TL 141930 MOD WS IN APCH REP AT 1210 B747=</p>
         </div>
 
         <form id="windShearForm">
+            <!-- Mensagem Codificada -->
+            <div class="form-group">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3>Mensagem Codificada</h3>
+                    <button type="button" id="editMsgBtn">Editar</button>
+                </div>
+                <pre class="preview" id="messagePreview"></pre>
+                <textarea class="hidden" id="manualMsg"></textarea>
+            </div>
+
             <!-- Fenômeno -->
             <div class="form-group">
                 <label>Fenômeno</label>
@@ -208,15 +218,6 @@
                 </div>
             </div>
 
-            <!-- Mensagem Codificada -->
-            <div class="form-group">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3>Mensagem Codificada</h3>
-                    <button type="button" id="editMsgBtn">Editar</button>
-                </div>
-                <pre class="preview" id="messagePreview"></pre>
-                <textarea class="hidden" id="manualMsg"></textarea>
-            </div>
 
             <!-- Ações -->
             <div class="button-group">
