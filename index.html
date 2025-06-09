@@ -247,6 +247,20 @@
     </div>
 
     <script>
+        const $ = selector => document.querySelector(selector);
+        const dom = {
+            validityStart: $('#validityStart'),
+            validityEnd: $('#validityEnd'),
+            repAC: $('#repAC'),
+            rwy: $('#rwy'),
+            customMinutes: $('#customMinutes'),
+            manualMsg: $('#manualMsg'),
+            messagePreview: $('#messagePreview'),
+            severityGroup: $('#severityGroup'),
+            repFields: $('#repFields'),
+            obsFields: $('#obsFields')
+        };
+
         const state = {
             phenomenon: 'WS',
             location: 'SBAR',
@@ -275,11 +289,10 @@
 
         // Helpers
         const updateState = (key, value) => {
-            // Forçar maiúsculas no campo da aeronave
             if (key === 'repAC') value = value.toUpperCase();
             state[key] = value;
-            updateUI();
             calculateValidityEnd();
+            updateUI();
         };
 
 
@@ -298,7 +311,7 @@
                     pad(endDate.getHours()) + ':' +
                     pad(endDate.getMinutes());
 
-                document.getElementById('validityEnd').value = state.validityEnd;
+                dom.validityEnd.value = state.validityEnd;
             }
         };
 
@@ -373,18 +386,18 @@
             });
 
             // Atualizar campos condicionais
-            document.getElementById('severityGroup').style.display =
+            dom.severityGroup.style.display =
                 state.phenomenon === 'WS' ? 'block' : 'none';
 
-            document.getElementById('repFields').classList.toggle('hidden',
+            dom.repFields.classList.toggle('hidden',
                 !state.infoSource.includes('REP'));
 
-            document.getElementById('obsFields').classList.toggle('hidden',
+            dom.obsFields.classList.toggle('hidden',
                 !state.infoSource.includes('OBS') || state.infoSource.includes('REP'));
 
             // Atualizar mensagem
             const msg = generateMessage();
-            document.getElementById('messagePreview').textContent = msg;
+            dom.messagePreview.textContent = msg;
             if (!state.isEditingMsg) state.manualMsg = msg;
 
             // Atualizar botões de tempo ativos
@@ -393,24 +406,32 @@
             });
         };
 
-        document.getElementById('repAC').addEventListener('input', (e) => {
+        dom.repAC.addEventListener('input', (e) => {
             e.target.value = e.target.value.toUpperCase();
             updateState('repAC', e.target.value);
         });
 
-        // Event Listeners
-        document.querySelectorAll('.button-group button').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const group = e.target.closest('.button-group').id;
-                const value = e.target.dataset.value;
+        dom.rwy.addEventListener('input', (e) => {
+            e.target.value = e.target.value.toUpperCase();
+            state.rwy = e.target.value;
+            updateUI();
+        });
 
-                if (group === 'phenomenon') {
+        // Event Listeners
+        document.querySelectorAll('.button-group').forEach(group => {
+            group.addEventListener('click', (e) => {
+                const btn = e.target.closest('button');
+                if (!btn) return;
+                const groupId = group.id;
+                const value = btn.dataset.value;
+
+                if (groupId === 'phenomenon') {
                     state.phenomenon = value;
-                } else if (group === 'severity') {
+                } else if (groupId === 'severity') {
                     state.severity = value;
-                } else if (group === 'infoSource') {
+                } else if (groupId === 'infoSource') {
                     state.infoSource = [value];
-                } else if (group === 'localization') {
+                } else if (groupId === 'localization') {
                     state.localization = [value];
                 }
 
@@ -424,14 +445,17 @@
             });
         });
 
-        document.getElementById('customMinutes').addEventListener('input', (e) => {
-            handleTimeSelection(parseInt(e.target.value) || 0);
+        dom.customMinutes.addEventListener('input', (e) => {
+            const val = Math.max(0, parseInt(e.target.value) || 0);
+            e.target.value = val;
+            handleTimeSelection(val);
         });
 
 
         document.querySelectorAll('input').forEach(input => {
             input.addEventListener('input', (e) => {
                 const id = e.target.id;
+                if (id === 'repAC' || id === 'rwy') return;
                 state[id] = e.target.value;
                 updateUI();
             });
@@ -439,17 +463,17 @@
 
         document.getElementById('editMsgBtn').addEventListener('click', () => {
             state.isEditingMsg = !state.isEditingMsg;
-            document.getElementById('manualMsg').classList.toggle('hidden', !state.isEditingMsg);
-            document.getElementById('messagePreview').classList.toggle('hidden', state.isEditingMsg);
+            dom.manualMsg.classList.toggle('hidden', !state.isEditingMsg);
+            dom.messagePreview.classList.toggle('hidden', state.isEditingMsg);
             if (state.isEditingMsg) {
-                document.getElementById('manualMsg').value = state.manualMsg;
+                dom.manualMsg.value = state.manualMsg;
             }
             updateUI();
         });
 
         // Inicialização
-        document.getElementById('validityStart').value = state.validityStart;
-        document.getElementById('validityStart').min = new Date().toISOString().slice(0, 16);
+        dom.validityStart.value = state.validityStart;
+        dom.validityStart.min = new Date().toISOString().slice(0, 16);
         updateUI();
     </script>
 </body>
